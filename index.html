@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+ </head >
+  <body>
+    <div class="jumbotron text-center">
+        <h1>SQLSheet</h1>
+        <p>View Your DB</p>
+    </div>
+
+    <div class="float-container">
+        <div class="row">
+            <div class="col-sm-12 mx-auto">
+                <form id="form" class="form-horizontal">
+                    <div class="form-group row">
+                        <label class="control-label col-sm-4 text-right" for="host">host:</label>
+                        <input type="text" class="form-control col-sm-4" id="host" name="host" value="" placeholder="host">
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="control-label col-sm-4 text-right" for="port">port:</label>
+                        <input type="text" class="form-control col-sm-4" id="port" name="port" value="" placeholder="port">
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-sm-4 text-right" for="user">user:</label>
+                        <input type="text" class="form-control col-sm-4" id="user" name="user" value="" placeholder="user">
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-sm-4 text-right" for="password">password:</label>
+                        <input type="password" class="form-control col-sm-4" id="password" name="password" value="" placeholder="password">
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-sm-4 text-right" for="database">database:</label>
+                        <input type="database" class="form-control col-sm-4" id="database" name="database" value="" placeholder="database">
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 text-right">
+                            <button type="submit" class="btn btn-primary col-sm-4" id="submit">Enter</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-12 text-center">
+                <p id="res"></p>
+            </div>
+        </div>
+    </div>
+            
+  </body>
+</html>

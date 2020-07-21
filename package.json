@@ -1,0 +1,17 @@
+{
+  "name": "sqlsheets",
+  "version": "0.1.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron"
+  },
+  "author": "ken_",
+  "license": "ISC",
+  "devDependencies": {
+    "bootstrap": "^4.5.0",
+    "electron": "^9.1.1",
+    "jquery": "^3.5.1",
+    "mysql": "^2.18.1"
+  }
+}

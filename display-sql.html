@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <script src="display-sql.js"></script>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+ </head >
+  <body>
+    <div class="jumbotron text-center">
+        <h1>SQLSheet</h1>
+    </div>
+
+    <div class="float-container">
+        <div class="row">
+            <div class="col-sm-2 bg-dark text-white" id="databases" name="databases">
+                <div class="text-center">
+                    Databases
+                </div>
+            </div>
+            <div class="col-sm-2 bg-secondary text-white" id="tables" name="tables">
+                <div class="text-center">
+                    Tables
+                </div>
+            </div>
+            <div class="col-sm-8" name="data">
+                <div class="text-center">
+                    Content
+                </div>
+            </div>
+        </div>
+    </div>
+            
+  </body>
+</html>
