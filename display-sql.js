@@ -17,9 +17,9 @@ $(document).ready(()=>{
         $('#tables').html('')
         for(let table of tables){
             $('#tables').append(
-                `<div><button type="button" style="text-align:left;overflow-wrap: break-word;" class="btn btn-secondary btn-block table" name=`+table['Tables_in_'+database]+` id=`+table['Tables_in_'+database]+ `>` + table['Tables_in_'+database]+`</button></div>`)
+                `<div><button type="button" style="text-align:left;overflow-wrap: break-word;" class="btn btn-secondary btn-block dbtable" name=`+table['Tables_in_'+database]+` id=`+table['Tables_in_'+database]+ `>` + table['Tables_in_'+database]+`</button></div>`)
         }
-        $('.table').click(function(event){
+        $('.dbtable').click(function(event){
             let table = event.currentTarget.name
             var cres = ipcRenderer.sendSync('FetchSchema', table)
             $('#table-schema').text('')
