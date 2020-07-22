@@ -6,14 +6,14 @@ module.exports = {
 
     getMysqlConnection: function(args){
         con =  mysql.createConnection({
-            // host: args['host'],
-            // port: args['port'],
-            // user: args['user'],
-            // password: args['password'],
-            // database: args['database']
-            host: 'localhost',
-            port: '3306',
-            user: 'root'
+            host: args['host'],
+            port: args['port'],
+            user: args['user'],
+            password: args['password'],
+            database: args['database']
+            // host: 'localhost',
+            // port: '3306',
+            // user: 'root'
         });
         return con
     },
@@ -21,7 +21,6 @@ module.exports = {
     getDatabases: function(callback){
         var sql = "SHOW DATABASES;"
         con.query(sql, (error, result)=>{
-            console.log(result)
             callback(error, result)
         })
     },
@@ -34,7 +33,6 @@ module.exports = {
             }else{
                 sql = "SHOW TABLES;";
                 con.query(sql, (error, result)=>{
-                    console.log(result)
                     callback(error, result)
                 })
             }
