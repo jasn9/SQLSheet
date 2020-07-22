@@ -5,16 +5,15 @@ let con;
 module.exports = {
 
     getMysqlConnection: function(args){
-        console.log(args)
         con =  mysql.createConnection({
-            host: args['host'],
-            port: args['port'],
-            user: args['user'],
-            password: args['password'],
-            database: args['database']
-            // host: 'localhost',
-            // port: '3306',
-            // user: 'root'
+            // host: args['host'],
+            // port: args['port'],
+            // user: args['user'],
+            // password: args['password'],
+            // database: args['database']
+            host: 'localhost',
+            port: '3306',
+            user: 'root'
         });
         return con
     },
@@ -39,6 +38,20 @@ module.exports = {
                     callback(error, result)
                 })
             }
+        })
+    },
+
+    getTableSchema: function(args, callback){
+        var sql = "DESCRIBE "+args+";";
+        con.query(sql, (error, data)=>{
+            callback(error, data)
+        })
+    },
+
+    getTableData: function(args, callback){
+        var sql = "SELECT * FROM "+args+";";
+        con.query(sql, (error, data)=>{
+            callback(error, data)
         })
     },
 

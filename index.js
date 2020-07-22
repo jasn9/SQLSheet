@@ -2,7 +2,6 @@ const  $  = require('jquery')
 const { ipcRenderer } = require('electron')
 
 $(document).ready(()=>{
-    console.log("hello")
     $("#form").submit((event)=>{
         event.preventDefault()
         var val = ipcRenderer.sendSync('db-credentails', {
@@ -12,7 +11,6 @@ $(document).ready(()=>{
             password: $("#password").val(),
             database: $("#database").val()
         })
-        console.log(val)
         if(val['error']){
             $('#res').removeClass('text-success')
             $('#res').addClass('text-danger')

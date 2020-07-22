@@ -1,7 +1,9 @@
 
 const electron = require('electron')
 const dbHandler = require('./dbHandler')
-const { BrowserWindow, app, ipcMain } = require('electron')
+const { BrowserWindow, app, ipcMain } = require('electron');
+const { data } = require('jquery');
+const { readSync } = require('fs');
 
 let mainWindow;
 
@@ -35,7 +37,6 @@ electron.app.on('active', ()=>{
 
 
 ipcMain.on('db-credentails', (event, args)=>{
-    console.log(args)
     var con = dbHandler.getMysqlConnection(args)
     con.connect((err)=>{
         var res = {
@@ -56,7 +57,6 @@ ipcMain.on('showDatabase', (event,args)=>{
 })
 
 ipcMain.on('GetDatabases', (event, args)=>{
-    console.log('hello')
     dbHandler.getDatabases((error, data)=>{
         var res = {
             "success" : true,
@@ -64,6 +64,10 @@ ipcMain.on('GetDatabases', (event, args)=>{
             "error" : false,
             "reason" : error
         } 
+        if(error){
+            res.error = true;
+            res.success = false;
+        }
         event.returnValue = res;
     })
 })
@@ -76,6 +80,42 @@ ipcMain.on('FetchTables', (event, args)=>{
             "error" : false,
             "reason" : error
         } 
+        if(error){
+            res.error = true;
+            res.success = false;
+        }
         event.returnValue = res;
+    })
+})
+
+ipcMain.on('FetchSchema', (event, args)=>{
+    dbHandler.getTableSchema(args, (error, data)=>{
+        var res = {
+            "success" : true,
+            "payload" : data,
+            "error" : false,
+            "reason" : error
+        } 
+        if(error){
+            res.error = true;
+            res.success = false;
+        }
+        event.returnValue = res;
+    })
+})
+
+ipcMain.on('FetchData', (event, args)=>{
+    dbHandler.getTableData(args, (error, data)=>{
+        var res = {
+            "success" : true,
+            "payload" : data,
+            "error" : false,
+            "reason" : error
+        } 
+        if(error){
+            res.error = true;
+            res.success = false;
+        }
+        event.returnValue = res;  
     })
 })
