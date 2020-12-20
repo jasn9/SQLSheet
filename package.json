@@ -1,17 +1,24 @@
 {
-  "name": "sqlsheets",
-  "version": "0.1.0",
-  "description": "",
-  "main": "main.js",
+  "name": "sqlsheet",
+  "version": "1.0.0",
+  "description": "An Application To Interact with SQL database.",
+  "main": "public/main.js",
   "scripts": {
-    "start": "electron"
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "ken_",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasn9/SQLSheet.git"
+  },
+  "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "bootstrap": "^4.5.0",
-    "electron": "^9.1.1",
-    "jquery": "^3.5.1",
-    "mysql": "^2.18.1"
+  "bugs": {
+    "url": "https://github.com/jasn9/SQLSheet/issues"
+  },
+  "homepage": "https://github.com/jasn9/SQLSheet#readme",
+  "dependencies": {
+    "electron": "^11.1.0",
+    "jquery": "^3.5.1"
   }
 }
