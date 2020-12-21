@@ -17,13 +17,23 @@ let createWindow = () => {
 app.whenReady().then(createWindow)
 
 ipcMain.handle(Constants.DATABASE_CONNECTION_REQUEST, (e: Electron.IpcMainInvokeEvent, args: DatabaseCredential)=>{
-    let res = Connector.CreateConnection(args)
-    console.log(res)
-    e.returnValue = res
+    return new Promise((resolve: (value: boolean)=>void, reject: (reason: string)=>void)=>{
+      Connector.CreateConnection(args).then(
+        (value: boolean)=>{
+          resolve(value)
+        },
+        (error: string)=>{
+          reject(error)
+        }
+      );
+    });
 });
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
+    if(Connector.getInstance()!=null){
+      Connector.getInstance().end()
+    }
     app.quit() 
   }
 })

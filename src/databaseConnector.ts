@@ -1,4 +1,4 @@
-import mysql = require('mysql')
+import mysql = require('mysql2')
 
 export type DatabaseCredential = {
     host: string
@@ -8,19 +8,48 @@ export type DatabaseCredential = {
 
 export class Connector {
     private conn: mysql.Connection
-    private static instance: Connector
+    private static instance: Connector | null
     private constructor(conn: mysql.Connection){
         this.conn = conn
     }
-    static CreateConnection(databaseCredential: DatabaseCredential): boolean{
-        let conn = mysql.createConnection(databaseCredential)
-        if(conn==null){
-            return false
-        }
-        Connector.instance = new Connector(conn)
-        return true
+
+    connect(): Promise<any> {
+        return new Promise((resolve: (value: boolean)=>void, reject: (error: string)=>void)=>{
+            this.conn.connect((error: mysql.QueryError|null)=>{
+                if(error){
+                    reject(error.message)
+                }
+                else{
+                    resolve(true)
+                }
+            })
+        });
     }
-    static getInstance(): Connector{
-        return Connector.instance
+
+    end(){
+        this.conn.end((err: mysql.QueryError|null)=>{
+            if(err){
+                console.log("Error: ", err.message)
+            }
+            else{
+                console.log("Connection Eneded")
+                Connector.instance = null
+            }
+        })
+    }
+
+    static CreateConnection(databaseCredential: DatabaseCredential): Promise<any>{
+        let conn = mysql.createConnection(databaseCredential)
+        console.log(conn)
+        Connector.instance = new Connector(conn)
+        return new Promise((resolve: (value: boolean)=>void, reject: (error: string)=>void)=>{
+            Connector.instance!.connect().then(
+            (value: boolean)=>{
+                resolve(value)
+            },
+            (error: string)=>{
+                reject(error)
+            });
+        });
     }
 }
