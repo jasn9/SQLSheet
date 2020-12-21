@@ -19,9 +19,12 @@
   },
   "homepage": "https://github.com/jasn9/SQLSheet#readme",
   "dependencies": {
+    "@types/mysql": "^2.15.16",
     "electron": "^11.1.0",
     "jquery": "^3.5.1",
+    "mysql": "^2.18.1",
     "ts-loader": "^8.0.12",
+    "typescript": "^4.1.3",
     "webpack": "^5.11.0",
     "webpack-cli": "^4.2.0"
   }

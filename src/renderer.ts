@@ -1,12 +1,6 @@
 import { ipcRenderer } from 'electron'
 import { Constants } from './constants'
-
-type DatabaseCredential = {
-    host: string
-    user: string
-    password: string
-} 
-
+import { DatabaseCredential } from './databaseConnector'
 
 const form = document.querySelector('#accessForm') as HTMLFormElement
 const inputHost = document.querySelector('#host') as HTMLInputElement
