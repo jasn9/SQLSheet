@@ -2,9 +2,10 @@
   "name": "sqlsheet",
   "version": "1.0.0",
   "description": "An Application To Interact with SQL database.",
-  "main": "public/main.js",
+  "main": "public/bundle-main.js",
   "scripts": {
     "start": "electron .",
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +20,9 @@
   "homepage": "https://github.com/jasn9/SQLSheet#readme",
   "dependencies": {
     "electron": "^11.1.0",
-    "jquery": "^3.5.1"
+    "jquery": "^3.5.1",
+    "ts-loader": "^8.0.12",
+    "webpack": "^5.11.0",
+    "webpack-cli": "^4.2.0"
   }
 }
