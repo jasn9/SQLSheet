@@ -1,4 +1,6 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain, IpcMain } from 'electron'
+
+import { Constants  } from './constants'
 
 let createWindow = () => {
   const win = new BrowserWindow({
@@ -13,6 +15,10 @@ let createWindow = () => {
 }
 
 app.whenReady().then(createWindow)
+
+ipcMain.handle(Constants.DATABASE_CONNECTION_REQUEST, (e: Electron.IpcMainInvokeEvent, args: any[])=>{
+  console.log(args)
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

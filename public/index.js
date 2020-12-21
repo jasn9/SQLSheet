@@ -1,10 +1,9 @@
-"use strict";
+import { ipcRenderer } from 'electron';
+import { Constants } from './constants';
 var form = document.querySelector('#accessForm');
 var inputHost = document.querySelector('#host');
 var inputUser = document.querySelector('#user');
 var inputPassword = document.querySelector('#password');
-console.log(form);
-console.log(inputHost);
 form.addEventListener('submit', function (e) {
     e.preventDefault();
     var databaseCredential = {
@@ -13,4 +12,5 @@ form.addEventListener('submit', function (e) {
         password: inputPassword.value
     };
     console.log(databaseCredential);
+    ipcRenderer.invoke(Constants.DATABASE_CONNECTION_REQUEST, databaseCredential);
 });

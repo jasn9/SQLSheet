@@ -1,8 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var electron_1 = require("electron");
+import { app, BrowserWindow, ipcMain } from 'electron';
+import { Constants } from './constants';
 var createWindow = function () {
-    var win = new electron_1.BrowserWindow({
+    var win = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
@@ -11,14 +10,17 @@ var createWindow = function () {
     });
     win.loadFile('./public/index.html');
 };
-electron_1.app.whenReady().then(createWindow);
-electron_1.app.on('window-all-closed', function () {
+app.whenReady().then(createWindow);
+ipcMain.handle(Constants.DATABASE_CONNECTION_REQUEST, function (e, args) {
+    console.log(args);
+});
+app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') {
-        electron_1.app.quit();
+        app.quit();
     }
 });
-electron_1.app.on('activate', function () {
-    if (electron_1.BrowserWindow.getAllWindows().length === 0) {
+app.on('activate', function () {
+    if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();
     }
 });

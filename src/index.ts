@@ -1,3 +1,5 @@
+import { ipcRenderer } from 'electron'
+import { Constants } from './constants'
 
 type DatabaseCredential = {
     host: string
@@ -11,7 +13,6 @@ const inputHost = document.querySelector('#host') as HTMLInputElement
 const inputUser = document.querySelector('#user') as HTMLInputElement
 const inputPassword = document.querySelector('#password') as HTMLInputElement
 
-
 form.addEventListener('submit', (e: Event) => {
     e.preventDefault()
     const databaseCredential: DatabaseCredential = {
@@ -20,4 +21,5 @@ form.addEventListener('submit', (e: Event) => {
         password: inputPassword.value
     }
     console.log(databaseCredential)
+    ipcRenderer.invoke(Constants.DATABASE_CONNECTION_REQUEST, databaseCredential)
 })
