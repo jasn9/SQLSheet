@@ -18,6 +18,7 @@ app.whenReady().then(createWindow)
 
 ipcMain.handle(Constants.DATABASE_CONNECTION_REQUEST, (e: Electron.IpcMainInvokeEvent, args: DatabaseCredential)=>{
     let res = Connector.CreateConnection(args)
+    console.log(res)
     e.returnValue = res
 });
 

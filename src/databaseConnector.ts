@@ -12,9 +12,13 @@ export class Connector {
     private constructor(conn: mysql.Connection){
         this.conn = conn
     }
-    static CreateConnection(databaseCredential: DatabaseCredential): void{
+    static CreateConnection(databaseCredential: DatabaseCredential): boolean{
         let conn = mysql.createConnection(databaseCredential)
+        if(conn==null){
+            return false
+        }
         Connector.instance = new Connector(conn)
+        return true
     }
     static getInstance(): Connector{
         return Connector.instance

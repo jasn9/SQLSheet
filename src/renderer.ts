@@ -16,4 +16,13 @@ form.addEventListener('submit', (e: Event) => {
     }
     console.log(databaseCredential)
     ipcRenderer.invoke(Constants.DATABASE_CONNECTION_REQUEST, databaseCredential)
-})
+    .then(
+        (res)=>{
+            console.log(res)
+            console.log("Completed")
+        },
+        ()=>{
+            console.log("Rejected")
+        }
+    );
+});
