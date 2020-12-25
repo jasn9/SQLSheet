@@ -6,6 +6,7 @@ const form = document.querySelector('#accessForm') as HTMLFormElement
 const inputHost = document.querySelector('#host') as HTMLInputElement
 const inputUser = document.querySelector('#user') as HTMLInputElement
 const inputPassword = document.querySelector('#password') as HTMLInputElement
+const result = document.querySelector('#result') as HTMLParagraphElement
 
 form.addEventListener('submit', (e: Event) => {
     e.preventDefault()
@@ -18,10 +19,11 @@ form.addEventListener('submit', (e: Event) => {
     ipcRenderer.invoke(Constants.DATABASE_CONNECTION_REQUEST, databaseCredential)
     .then(
         (value: boolean)=>{
-            console.log("Completed "+value)
+            result.innerText = Constants.CONNECTION_ESTABLISHED
+            ipcRenderer.send(Constants.VIEW_DB, "true")
         },
         (error: string)=>{
-            console.log("Rejected "+error)
+            result.innerText = Constants.CONNECTION_FAILED + Constants.SPACE + error;
         }
     );
 });
