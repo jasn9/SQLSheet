@@ -11,6 +11,10 @@ export type GetDatabases = {
     Database: string
 }
 
+export type GetTablesRequest = {
+    Database: string | undefined
+}
+
 export class Connector {
     private conn: mysql.Connection
     private static instance: Connector | null
@@ -34,16 +38,52 @@ export class Connector {
     getDatabase(): Promise<any> {
         return new Promise((resolve: (value: GetDatabases[])=>void, reject: (error: string)=>void)=>{
             const Query = Constants.GET_DATABASE_QUERY
-                this.conn.query(Query, (error: mysql.QueryError|null, result: any)=>{
-                    if(error){
-                        reject(error.message)
-                    }
-                    else{
-                        resolve(result)
-                    }
-                })
+            this.conn.query(Query, (error: mysql.QueryError|null, result: any)=>{
+                if(error){
+                   reject(error.message)
+                }
+                else{
+                    resolve(result)
+                }
+            })
         })
         
+    }
+
+    useDatabase(database: string|undefined): Promise<any> {
+        return new Promise((resolve: (value: boolean)=>void, reject: (error: string)=>void)=>{
+            const Query = Constants.USE_DATABASE_QUERY + database + Constants.SEMI_COLON
+            this.conn.query(Query, (error: mysql.QueryError|null, result: any)=>{
+                if(error){
+                    reject(error.message)
+                }
+                else{
+                    resolve(true)
+                }
+            })
+        })
+    }
+
+    getTables(getTablesRequest: GetTablesRequest): Promise<any> {
+        return new Promise((resolve: (value: any)=>void, reject: (error: string)=>void)=>{
+            this.useDatabase(getTablesRequest.Database).then(
+                (value: boolean)=>{
+                    const Query = Constants.GET_TABLES_QUERY
+                    this.conn.query(Query, (error: mysql.QueryError|null, result: any)=>{
+                        if(error){
+                            reject(error.message)
+                        }
+                        else{
+                            resolve(result)
+                        }
+                    })
+                },
+                (error: string)=>{
+                    reject(error)
+                }
+            )
+            
+        })
     }
 
     end(): void {

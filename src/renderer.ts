@@ -15,7 +15,6 @@ form.addEventListener('submit', (e: Event) => {
         user: inputUser.value,
         password: inputPassword.value
     }
-    console.log(databaseCredential)
     ipcRenderer.invoke(Constants.DATABASE_CONNECTION_REQUEST, databaseCredential)
     .then(
         (value: boolean)=>{

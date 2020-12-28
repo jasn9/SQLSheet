@@ -3,7 +3,11 @@ export class Constants{
     static CONNECTION_ESTABLISHED: string = 'Connection Established'
     static CONNECTION_FAILED: string = 'Connection Failed'
     static SPACE: string = " "
+    static SEMI_COLON: string = ";"
     static VIEW_DB: string = "viewDB"
     static GET_DATABASES: string = "getDatabases"
     static GET_DATABASE_QUERY = "SHOW DATABASES;"
+    static GET_TABLES: string = "getTables"
+    static USE_DATABASE_QUERY = "USE "
+    static GET_TABLES_QUERY: string = "SHOW TABLES;"
 }
