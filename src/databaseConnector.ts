@@ -15,6 +15,10 @@ export type GetTablesRequest = {
     Database: string | undefined
 }
 
+export type GetDataRequest = {
+    Table: string | undefined
+}
+
 export class Connector {
     private conn: mysql.Connection
     private static instance: Connector | null
@@ -83,6 +87,20 @@ export class Connector {
                 }
             )
             
+        })
+    }
+
+    getData(getDataRequest: GetDataRequest): Promise<any> {
+        return new Promise((resolve: (value: any)=>void, reject: (error: string)=>void)=>{
+            const Query = Constants.GET_DATA_QUERY + Constants.SPACE + getDataRequest.Table + Constants.SEMI_COLON
+            this.conn.query(Query, (error: mysql.QueryError|null, result: any)=>{
+                if(error){
+                    reject(error.message)
+                }
+                else{
+                    resolve(result)
+                }
+            })
         })
     }
 

@@ -1,5 +1,5 @@
-import { app, BrowserWindow, ipcMain, IpcMain } from 'electron'
-import { DatabaseCredential, Connector, GetDatabases, GetTablesRequest } from './databaseConnector'
+import { app, BrowserWindow, ipcMain, IpcMain, ipcRenderer } from 'electron'
+import { DatabaseCredential, Connector, GetDatabases, GetTablesRequest, GetDataRequest } from './databaseConnector'
 import { Constants  } from './constants'
 
 let win: BrowserWindow;
@@ -51,6 +51,19 @@ ipcMain.handle(Constants.GET_DATABASES, (e: Electron.IpcMainInvokeEvent, args: a
 ipcMain.handle(Constants.GET_TABLES, (e: Electron.IpcMainInvokeEvent, args: GetTablesRequest): Promise<any>=>{
   return new Promise((resolve: (value: any)=>void, reject: (error: string)=>void)=>{
     Connector.getInstance().getTables(args).then(
+      (value: any)=>{
+        resolve(value)
+      },
+      (error: string)=>{
+        reject(error)
+      }
+    )
+  })
+})
+
+ipcMain.handle(Constants.GET_DATA, (e: Electron.IpcMainInvokeEvent, args: GetDataRequest): Promise<any>=>{
+  return new Promise((resolve: (value: any)=>void, reject: (error: string)=>void)=>{
+    Connector.getInstance().getData(args).then(
       (value: any)=>{
         resolve(value)
       },

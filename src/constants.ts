@@ -10,4 +10,6 @@ export class Constants{
     static GET_TABLES: string = "getTables"
     static USE_DATABASE_QUERY = "USE "
     static GET_TABLES_QUERY: string = "SHOW TABLES;"
+    static GET_DATA: string = "getData"
+    static GET_DATA_QUERY = "SELECT * FROM";
 }
