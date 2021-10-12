@@ -21,7 +21,7 @@
   "dependencies": {
     "@types/mysql": "^2.15.16",
     "bootstrap": "^4.5.3",
-    "electron": "^11.1.0",
+    "electron": "^11.5.0",
     "jquery": "^3.5.1",
     "mysql2": "^2.2.5",
     "popper.js": "^1.16.1",
